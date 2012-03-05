@@ -1,4 +1,4 @@
-module Indexer
+module InvertedIndex
   class Dictionary
     attr_accessor :term, :doc_count, :tot_freq, :postings
 

@@ -1,1 +1,5 @@
+require 'inverted_index/dictionary'
+require 'inverted_index/parse'
+require 'inverted_index/posting'
+require 'inverted_index/stopwords'
 require 'inverted_index/token'

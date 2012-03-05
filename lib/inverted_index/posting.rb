@@ -1,4 +1,4 @@
-module Indexer
+module InvertedIndex
   class Posting
     attr_accessor :docid, :freq
 
