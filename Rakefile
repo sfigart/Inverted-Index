@@ -17,11 +17,12 @@ Jeweler::Tasks.new do |gem|
   gem.name = "inverted_index"
   gem.homepage = "http://github.com/sfigart/inverted_index"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Inverted Index}
+  gem.description = %Q{Inverted Index implementation}
   gem.email = "sfigart@gmail.com"
   gem.authors = ["sfigart"]
   # dependencies defined in Gemfile
+  gem.add_dependency 'nokogiri', '>=1.5.0'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
@@ -32,6 +33,7 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
+=begin
 require 'rcov/rcovtask'
 Rcov::RcovTask.new do |test|
   test.libs << 'test'
@@ -39,6 +41,7 @@ Rcov::RcovTask.new do |test|
   test.verbose = true
   test.rcov_opts << '--exclude "gems/*"'
 end
+=end
 
 task :default => :test
 
