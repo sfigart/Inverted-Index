@@ -1,41 +1,38 @@
 module InvertedIndex
   class Parse
-    attr_accessor :html, :doc, :body, :text
+    attr_accessor :html, :doc, :body, :text, :tokens
     def initialize(html)
       @html = html
     end
 
     def parse
-      # Remove blank nodes, substitute entities
-      @doc = Nokogiri::HTML(@html) do |config|
-	config.noblanks.noent
+      @doc = Hpricot(@html)
+      @doc.search('script').remove
+      @doc.search('style').remove
+      @doc.search('iframe').remove
+
+      # Get all text nodes
+      @text_nodes = (@doc/"//*/text()")
+      @tokens = []
+      @text_nodes.each do |node|
+	text = node.to_plain_text.strip
+	words = clean(text).split(' ')
+	words.each do |word|
+	  clean_word  = clean(word)
+	  @tokens << clean_word unless clean_word.empty?
+	end
       end
-      @body = @doc.css('body')
-      @body.css('script').remove
-      @body.css('style').remove
-      @body.css('iframe').remove
-      @text = @body.text
-=begin
-      # Removing images because we are not interested in image tags for nohttp://digg.comw
-      @images = @body.css('img').remove
+      
+      # Return text separated by spaces
+      @text = @tokens.join(' ')
+    end
 
-      # Process anchor text separately because the .text function does not include
-      # separators for link text
-      @anchors = @body.css('a').remove
-      @anchor_text = []
-      @anchors.each {|a| @anchor_text << a.text}
-
-      @text = @anchor_text.join(' ')
-
-      # Replace all new lines and tabs with spaces
-      @text << @body.text.gsub(/\n|\t/, ' ')
-
-      # Replace apostrophe's with ''
-      @text.gsub!(/\'/,'')
-
-      # Replace all remaining non-word characters with spaces
-      @text.gsub!(/\W/, ' ')
-=end
+    # TODO: Still need to clean more characters without losing
+    # context (e.g. dates, U.S.)
+    def clean(text)
+      # Replace new line and tabs with space
+      # Replace apostrophe with ''
+      return text.gsub(/(\n|\t)/,' ').gsub(/\'/,'').strip
     end
   end
 end

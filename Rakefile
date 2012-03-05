@@ -23,6 +23,7 @@ Jeweler::Tasks.new do |gem|
   gem.authors = ["sfigart"]
   # dependencies defined in Gemfile
   gem.add_dependency 'nokogiri', '>=1.5.0'
+  gem.add_dependency 'hpricot', '>=0.8.6'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
