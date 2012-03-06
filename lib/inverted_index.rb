@@ -1,3 +1,4 @@
+require 'inverted_index/cleaner'
 require 'inverted_index/dictionary'
 require 'inverted_index/parse'
 require 'inverted_index/posting'
