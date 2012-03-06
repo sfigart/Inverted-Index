@@ -1,6 +1,6 @@
 module InvertedIndex
   class Cleaner
-    def self.clean(text)
+    def self.clean(text, text='')
       # Split by spaces
       tokens = text.split(' ')
 
