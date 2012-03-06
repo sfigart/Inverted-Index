@@ -1,9 +1,6 @@
 module InvertedIndex
   class Cleaner
     def self.clean(tokens, text='')
-      # Split by spaces
-      tokens = text.split(' ')
-
       # To lowercase
       tokens = tokens.each {|token| token.downcase}
      
