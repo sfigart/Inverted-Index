@@ -29,7 +29,7 @@ module InvertedIndex
 
       # Stem
       stemmed_terms = []
-      tokens.each {|token| stemmed_terms << token.stem if !token.stem.empty?}
+      tokens.each {|token| stemmed_terms << token.stem.downcase if !token.stem.empty?}
       tokens = stemmed_terms
     end
   end

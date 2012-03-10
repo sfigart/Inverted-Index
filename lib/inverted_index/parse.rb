@@ -12,6 +12,7 @@ module InvertedIndex
       @doc.search('script').remove
       @doc.search('style').remove
       @doc.search('iframe').remove
+      @doc.search('embed').remove
 
       # Get all text nodes
       @text_nodes = (@doc/"//*/text()")
