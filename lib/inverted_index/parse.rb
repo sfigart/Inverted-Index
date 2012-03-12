@@ -9,13 +9,14 @@ module InvertedIndex
 
     def parse
       @doc = Hpricot(@html)
+      @doc.search('head').remove
       @doc.search('script').remove
       @doc.search('style').remove
       @doc.search('iframe').remove
       @doc.search('embed').remove
 
       # Get all text nodes
-      @text_nodes = (@doc/"//*/text()")
+      @text_nodes = (@doc/"body//*/text()")
       @tokens = []
       @text_nodes.each do |node|
 	text = node.to_plain_text.strip
